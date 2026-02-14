@@ -1,0 +1,37 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="UTF-8"><style>body { font-family: Calibri, sans-serif; font-size: 11pt; }</style></head><body>
+<h1>DOF Builder | Multi-Layer Edition - User Guide</h1>
+<h2>What is this tool?</h2>
+<p>The <b>DOF Builder</b> is a specialized web-based utility designed for configuring lighting effects for <b>Direct Output Framework (DOF)</b>, which is commonly used in Virtual Pinball cabinets to control addressable LEDs (like Teensy/Wemos strips) and other toys.</p>
+<p>This specific "Multi-Layer Edition" allows users to visually design complex, layered lighting animations without manually writing cryptic configuration strings. It simulates how different effects (like strobes, pulses, or solid colors) look when stacked on top of each other.</p>
+<h2>Key Features</h2>
+<ul>
+<li><b>Multi-Layer Mixing</b>: Design up to 4 simultaneous layers of effects. For example, you can have a steady Blue background (Layer 1) with Red sparkles flickering on top (Layer 2).</li>
+<li><b>Real-Time Simulation</b>: A visual "LED Strip" preview shows exactly how your combined effects will look in real-time.</li>
+<li><b>Advanced Effect Controls</b>:</li>
+<li><b>Effect Types</b>: Static, Blink, Pulse, and Flicker/Strobe.</li>
+<li><b>Colors</b>: Select from a massive palette of named DOF colors (e.g., <code>Red</code>, <code>IceBlue</code>, <code>Gold</code>).</li>
+<li><b>Sequencing</b>: Use "Start Delay" and "Duration" to create timed sequences (e.g., Flash Red for 500ms, then wait and Flash Green).</li>
+<li><b>Density (Sparkles)</b>: Create "sparkle" or "noise" effects by reducing density (e.g., only lighting up 10% of LEDs at random).</li>
+<li><b>Positioning</b>: Map effects to specific parts of a strip (e.g., only the bottom 50%).</li>
+<li><b>Section Management</b>: Pre-loaded with common Virtual Pinball cabinet sections (e.g., <code>PF Left Effects MX</code>, <code>Undercab Complex</code>, <code>Flipper Buttons</code>).</li>
+<li><b>Export Workflow</b>: "Stage" your designs for different sections and generate a final CSV code snippet ready for your <code>directoutputconfig.ini</code> or similar configuration files.</li>
+<li><b>Auto-Save</b>: Work is automatically saved to your browser's local storage so you don't lose progress if you refresh.</li>
+</ul>
+<h2>Why might someone use it?</h2>
+<p>1. <b>Simplifying Complex Configs</b>: Writing raw DOF config strings manually (e.g., <code>Red Blink 500 / Blue On</code>) is error-prone and hard to visualize. This tool provides a GUI to generate them.</p>
+<p>2. <b>Visualizing "Additive" Mixing</b>: One of the hardest things to predict in LED programming is how colors mix (e.g., Red + Blue = Magenta). This tool simulates that physics, showing users why "White sparkles on a White background" won't be visible.</p>
+<p>3. <b>Designing Custom Toy Effects</b>: Users can create unique light shows for specific game events (switches, solenoids, or "E Codes") without knowing the underlying syntax.</p>
+<p>4. <b>Rapid Prototyping</b>: You can quickly test ideas like "What if the undercab light pulses purple while the flipper buttons flash yellow?" without needing to load a table in Visual Pinball.</p>
+<h2>How to Use</h2>
+<p>1. <b>Select a Target Section</b>: Choose which part of your cabinet you are designing for (e.g., "Right Magnasave").</p>
+<p>2. <b>Configure Layers</b>:</p>
+<ul>
+<li>Pick a <b>Color</b>.</li>
+<li>Choose an <b>Effect</b> (e.g., Flicker).</li>
+<li>Adjust <b>Duration</b> and <b>Delay</b>.</li>
+</ul>
+<p>3. <b>Preview</b>: Watch the LED strip simulation at the bottom.</p>
+<p>4. <b>Apply</b>: Click "Apply Layers to Section" to save that design to the staging area.</p>
+<p>5. <b>Export</b>: Once all sections are designed, click "Generate Final CSV" to get the code string.</p>
+</body></html>
