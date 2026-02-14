@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,814 +14,1142 @@
             --border: #bdc3c7;
             --active-slot: #3498db;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
-        header { background: var(--primary); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        
-        .container { display: flex; flex-wrap: wrap; height: calc(100vh - 60px); }
-        
-        /* Sidebar Controls */
-        .controls { flex: 0 0 420px; background: white; padding: 20px; overflow-y: auto; border-right: 1px solid var(--border); box-shadow: 2px 0 5px rgba(0,0,0,0.05); position: relative; z-index: 10; }
-        .control-group { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px; background: #fafafa; position: relative; }
-        
-        .layer-tabs { display: flex; gap: 5px; width: 100%; }
-        .layer-tab { 
-            flex: 1; padding: 8px 0; text-align: center; background: #eee; border: 1px solid #ccc; 
-            cursor: pointer; font-weight: bold; border-radius: 4px 4px 0 0; border-bottom: none;
-            position: relative; top: 1px; font-size: 0.9rem;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
         }
-        .layer-tab.active { background: white; border-top: 3px solid var(--active-slot); color: var(--active-slot); z-index: 2; border-bottom: 1px solid white; }
-        .layer-tab.has-data::after { content: '•'; color: var(--highlight); position: absolute; top: 2px; right: 5px; font-size: 1.2rem; line-height: 0.5; }
 
-        .active-layer-panel { border: 1px solid #ccc; padding: 15px; background: white; border-radius: 0 0 5px 5px; }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem; color: #555; }
-        .input-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-        .input-row label { margin: 0; min-width: 90px; }
-        input[type="text"], input[type="number"], select { width: 100%; padding: 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.9rem; }
-        input[type="range"] { flex: 1; cursor: pointer; }
-        input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: calc(100vh - 60px);
+        }
+
+        /* Sidebar Controls */
+        .controls {
+            flex: 0 0 420px;
+            background: white;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .layer-tabs {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .layer-tab {
+            flex: 1;
+            padding: 8px 0;
+            text-align: center;
+            background: #eee;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+            border-bottom: none;
+            position: relative;
+            top: 1px;
+            font-size: 0.9rem;
+        }
+
+        .layer-tab.active {
+            background: white;
+            border-top: 3px solid var(--active-slot);
+            color: var(--active-slot);
+            z-index: 2;
+            border-bottom: 1px solid white;
+        }
+
+        .layer-tab.has-data::after {
+            content: '•';
+            color: var(--highlight);
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            font-size: 1.2rem;
+            line-height: 0.5;
+        }
+
+        .active-layer-panel {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background: white;
+            border-radius: 0 0 5px 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .input-row label {
+            margin: 0;
+            min-width: 90px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
 
         /* Color Grid - Scroll Stutter Fix */
-        .color-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(20px, 1fr)); 
-            gap: 2px; 
-            max-height: 200px; 
-            overflow-y: scroll; /* Force scrollbar to allow consistency */
-            padding: 4px; 
-            padding-right: 10px; /* Buffer for hover effects near scrollbar */
-            border: 1px solid #ddd; 
-            margin-top: 5px; 
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+            gap: 2px;
+            max-height: 200px;
+            overflow-y: scroll;
+            /* Force scrollbar to allow consistency */
+            padding: 4px;
+            padding-right: 10px;
+            /* Buffer for hover effects near scrollbar */
+            border: 1px solid #ddd;
+            margin-top: 5px;
         }
-        .color-swatch { width: 20px; height: 20px; border-radius: 2px; cursor: pointer; border: 1px solid #ccc; }
-        .color-swatch:hover { transform: scale(1.5); z-index: 10; border-color: black; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .color-swatch.selected { border: 2px solid black; transform: scale(1.2); z-index: 5; }
-        
-        /* Main Workspace */
-        .workspace { flex: 1; padding: 25px; display: flex; flex-direction: column; overflow-y: auto; background: #eef2f5; position: relative; z-index: 1; }
-        
-        .section-selector { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .section-btn { padding: 8px 14px; background: white; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
-        .section-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
-        /* LED Strip Preview */
-        .preview-container { 
-            background: #000; padding: 25px; border-radius: 12px; margin-bottom: 20px; 
-            display: flex; flex-direction: column; align-items: center;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.8); border: 1px solid #444;
-        }
-        .led-strip {
-            display: grid; grid-template-columns: repeat(100, 1fr); gap: 0;
-            width: 100%; height: 50px; background: #000;
-            border: 1px solid #333; margin-top: 10px; position: relative;
-        }
-        .led { background-color: #000; transition: background-color 0.0s; } 
-        
-        .layer-legend { display: flex; gap: 15px; margin-top: 10px; font-size: 0.8rem; color: #aaa; }
-        .legend-item { display: flex; align-items: center; gap: 5px; }
-        .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
-        textarea { width: 100%; height: 80px; font-family: 'Consolas', monospace; padding: 10px; border: 1px solid var(--border); font-size: 0.85rem; }
-        
-        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: opacity 0.2s; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn-success { background: #27ae60; color: white; }
-        .btn-danger { background: #c0392b; color: white; }
-        .btn-warning { background: #f39c12; color: white; }
-        .btn-sm { padding: 5px 10px; font-size: 0.8rem; }
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.5);
+            z-index: 10;
+            border-color: black;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-swatch.selected {
+            border: 2px solid black;
+            transform: scale(1.2);
+            z-index: 5;
+        }
+
+        /* Main Workspace */
+        .workspace {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: #eef2f5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-btn {
+            padding: 8px 14px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .section-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* LED Strip Preview */
+        .preview-container {
+            background: #000;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid #444;
+        }
+
+        .led-strip {
+            display: grid;
+            grid-template-columns: repeat(100, 1fr);
+            gap: 0;
+            width: 100%;
+            height: 50px;
+            background: #000;
+            border: 1px solid #333;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .led {
+            background-color: #000;
+            transition: background-color 0.0s;
+        }
+
+        .layer-legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            font-family: 'Consolas', monospace;
+            padding: 10px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #c0392b;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
 
         /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; }
-        .modal-content { background: white; margin: 5vh auto; padding: 30px; width: 80%; max-width: 800px; border-radius: 8px; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        .close { float: right; font-size: 28px; cursor: pointer; color: #999; }
-        
-        .disabled-overlay { opacity: 0.5; pointer-events: none; position: relative; }
-        .disabled-overlay::after { content: "Locked"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.7); font-weight: bold; color: #555; z-index: 10; font-size: 0.8rem; }
-        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5vh auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .disabled-overlay {
+            opacity: 0.5;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .disabled-overlay::after {
+            content: "Locked";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            color: #555;
+            z-index: 10;
+            font-size: 0.8rem;
+        }
+
         /* Custom Tooltip Styling - High Z-Order and Fixed Positioning */
-        .tooltip-container { position: relative; display: inline-block; margin-left: 5px; cursor: help; }
-        .tooltip-icon { width: 16px; height: 16px; background: #bdc3c7; color: white; border-radius: 50%; text-align: center; font-size: 11px; line-height: 16px; display:inline-block;}
-        
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+            cursor: help;
+        }
+
+        .tooltip-icon {
+            width: 16px;
+            height: 16px;
+            background: #bdc3c7;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 11px;
+            line-height: 16px;
+            display: inline-block;
+        }
+
         .tooltip-text {
-            visibility: hidden; width: 220px; background-color: #222; color: #fff; text-align: left;
-            border-radius: 6px; padding: 12px; 
-            position: fixed; /* Fixed to viewport to float over everything */
-            z-index: 10000; /* Extremely high z-index */
-            opacity: 0; transition: opacity 0.2s; font-size: 0.8rem; font-weight: normal; line-height: 1.4;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5); border: 1px solid #444;
+            visibility: hidden;
+            width: 220px;
+            background-color: #222;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 12px;
+            position: fixed;
+            /* Fixed to viewport to float over everything */
+            z-index: 10000;
+            /* Extremely high z-index */
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.8rem;
+            font-weight: normal;
+            line-height: 1.4;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
             pointer-events: none;
         }
-        
-        .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
+
 <body>
 
-<header>
-    <div style="display:flex; align-items:center; gap:15px;">
-        <h1>DOF Builder <span style="font-weight:normal; font-size:0.8em; opacity:0.8;">| Multi-Layer Edition</span></h1>
-        <input type="text" id="e_code" placeholder="E Code (Required)" style="width: 150px; padding: 5px; border-radius:4px; border:none; color:#333;" oninput="saveState()">
-    </div>
-    <div style="display:flex; gap:10px;">
-        <button class="btn btn-warning btn-sm" onclick="factoryReset()">Factory Reset (Clear Storage)</button>
-        <button class="btn btn-primary btn-sm" onclick="document.getElementById('glossaryModal').style.display='block'">Help & Glossary</button>
-    </div>
-</header>
+    <header>
+        <div style="display:flex; align-items:center; gap:15px;">
+            <h1>DOF Builder <span style="font-weight:normal; font-size:0.8em; opacity:0.8;">| Multi-Layer Edition</span>
+            </h1>
+            <input type="text" id="e_code" placeholder="E Code (Required)"
+                style="width: 150px; padding: 5px; border-radius:4px; border:none; color:#333;" oninput="saveState()">
+        </div>
+        <div style="display:flex; gap:10px;">
+            <button class="btn btn-warning btn-sm" onclick="factoryReset()">Factory Reset (Clear Storage)</button>
+            <button class="btn btn-primary btn-sm"
+                onclick="document.getElementById('glossaryModal').style.display='block'">Help & Glossary</button>
+        </div>
+    </header>
 
-<div class="container">
-    <div class="controls">
-        
-        <div style="margin-bottom: 20px;">
-            <h3 style="margin-top:0; color:var(--primary);">Layer Configuration</h3>
-            <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">Select a layer to edit. Layers are <strong>Additive</strong> (they mix).</p>
-            
-            <div class="layer-tabs" id="layerTabs">
-                <div class="layer-tab active" onclick="switchLayer(0)">Layer 1</div>
-                <div class="layer-tab" onclick="switchLayer(1)">Layer 2</div>
-                <div class="layer-tab" onclick="switchLayer(2)">Layer 3</div>
-                <div class="layer-tab" onclick="switchLayer(3)">Layer 4</div>
-            </div>
+    <div class="container">
+        <div class="controls">
 
-            <div class="active-layer-panel">
-                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                    <label>Base Color</label>
-                    <button class="btn btn-danger btn-sm" style="padding: 2px 8px; font-size:0.7rem;" onclick="clearCurrentLayer()">Clear Layer</button>
-                </div>
-                
-                <input type="text" id="layerColorName" readonly placeholder="Select from grid..." style="margin-bottom:5px; background:#f9f9f9;">
-                <div class="color-grid" id="colorGrid"></div>
+            <div style="margin-bottom: 20px;">
+                <h3 style="margin-top:0; color:var(--primary);">Layer Configuration</h3>
+                <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">Select a layer to edit. Layers are
+                    <strong>Additive</strong> (they mix).</p>
 
-                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-
-                <div class="input-row">
-                    <label>Effect Type</label>
-                    <select id="layerEffect" onchange="updateLayerData()">
-                        <option value="">Static (Solid)</option>
-                        <option value="On">On</option>
-                        <option value="Blink">Blink</option>
-                        <option value="Pulse">Pulse</option>
-                        <option value="Flicker">Flicker (Strobe)</option>
-                    </select>
+                <div class="layer-tabs" id="layerTabs">
+                    <div class="layer-tab active" onclick="switchLayer(0)">Layer 1</div>
+                    <div class="layer-tab" onclick="switchLayer(1)">Layer 2</div>
+                    <div class="layer-tab" onclick="switchLayer(2)">Layer 3</div>
+                    <div class="layer-tab" onclick="switchLayer(3)">Layer 4</div>
                 </div>
 
-                <div class="input-row">
-                    <label style="display:flex; align-items:center; gap:5px;">
-                        Sequence (Timed)
-                        <input type="checkbox" id="layerTimed" onchange="updateLayerData()" title="Enable to limit duration (sequencing). Disable for solid background.">
-                    </label>
-                    <div style="flex:1;"></div>
-                </div>
+                <div class="active-layer-panel">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <label>Base Color</label>
+                        <button class="btn btn-danger btn-sm" style="padding: 2px 8px; font-size:0.7rem;"
+                            onclick="clearCurrentLayer()">Clear Layer</button>
+                    </div>
 
-                <div class="input-row" id="durationRow">
-                    <label>Duration (ms)</label>
-                    <input type="number" id="layerDuration" value="1000" oninput="updateLayerData()">
-                    <span class="tooltip-container" onmouseenter="positionTooltip(this)">
-                        <span class="tooltip-icon">?</span>
-                        <div class="tooltip-text">
-                            <strong>Duration Control</strong><br>
-                            - <strong>Static/On:</strong> Ignored unless "Sequence" is checked. If checked, controls length of solid block.<br>
-                            - <strong>Blink:</strong> Cycle time.<br>
-                            - <strong>Flicker:</strong> Strobe speed.
-                        </div>
-                    </span>
-                </div>
+                    <input type="text" id="layerColorName" readonly placeholder="Select from grid..."
+                        style="margin-bottom:5px; background:#f9f9f9;">
+                    <div class="color-grid" id="colorGrid"></div>
 
-                <div class="input-row">
-                    <label>Start Delay (ms)</label>
-                    <input type="number" id="layerDelay" value="0" oninput="updateLayerData()">
-                    <span class="tooltip-container" onmouseenter="positionTooltip(this)">
-                        <span class="tooltip-icon">?</span>
-                        <div class="tooltip-text">
-                            <strong>Sequence Offset</strong><br>
-                            Delays the start of this effect. Use this to stack effects (e.g., Red first, then Blue).
-                        </div>
-                    </span>
-                </div>
+                    <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
 
-                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+                    <div class="input-row">
+                        <label>Effect Type</label>
+                        <select id="layerEffect" onchange="updateLayerData()">
+                            <option value="">Static (Solid)</option>
+                            <option value="On">On</option>
+                            <option value="Blink">Blink</option>
+                            <option value="Pulse">Pulse</option>
+                            <option value="Flicker">Flicker (Strobe)</option>
+                        </select>
+                    </div>
 
-                <div id="densityControls">
-                    <div style="display:flex; align-items:center; margin-bottom:10px;">
-                        <h4 style="margin:0; font-size:0.9rem;">Density & Flicker</h4>
-                        <div class="tooltip-container" onmouseenter="positionTooltip(this)">
+                    <div class="input-row">
+                        <label style="display:flex; align-items:center; gap:5px;">
+                            Sequence (Timed)
+                            <input type="checkbox" id="layerTimed" onchange="updateLayerData()"
+                                title="Enable to limit duration (sequencing). Disable for solid background.">
+                        </label>
+                        <div style="flex:1;"></div>
+                    </div>
+
+                    <div class="input-row" id="durationRow">
+                        <label>Duration (ms)</label>
+                        <input type="number" id="layerDuration" value="1000" oninput="updateLayerData()">
+                        <span class="tooltip-container" onmouseenter="positionTooltip(this)">
                             <span class="tooltip-icon">?</span>
                             <div class="tooltip-text">
-                                <strong>Density:</strong> % of LEDs lit (random noise). 0% = Solid Fill.<br>
-                                <strong>Min/Max:</strong> Controls the duration (ms) a random sparkle stays ON before moving.
+                                <strong>Duration Control</strong><br>
+                                - <strong>Static/On:</strong> Ignored unless "Sequence" is checked. If checked, controls
+                                length of solid block.<br>
+                                - <strong>Blink:</strong> Cycle time.<br>
+                                - <strong>Flicker:</strong> Strobe speed.
                             </div>
-                        </div>
+                        </span>
                     </div>
 
                     <div class="input-row">
-                        <label>Density %</label>
-                        <input type="range" id="layerDensity" min="0" max="100" value="0" oninput="updateRangeDisplay('disp_den', this.value); updateLayerData()">
-                        <span id="disp_den" style="width:30px; text-align:right;">0</span>
-                    </div>
-                    <div class="input-row">
-                        <label>Flicker Min/Max</label>
-                        <input type="number" id="layerFmin" placeholder="Min" style="width:40px" oninput="updateLayerData()">
-                        <input type="number" id="layerFmax" placeholder="Max" style="width:40px" oninput="updateLayerData()">
-                    </div>
-                </div>
-
-                <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
-
-                <div id="areaControls">
-                    <div style="display:flex; align-items:center; margin-bottom:10px;">
-                        <h4 style="margin:0; font-size:0.9rem;">Position & Area</h4>
-                        <div class="tooltip-container" onmouseenter="positionTooltip(this)">
+                        <label>Start Delay (ms)</label>
+                        <input type="number" id="layerDelay" value="0" oninput="updateLayerData()">
+                        <span class="tooltip-container" onmouseenter="positionTooltip(this)">
                             <span class="tooltip-icon">?</span>
                             <div class="tooltip-text">
-                                <strong>Map to Strip</strong><br>
-                                Defines where the effect appears.<br>
-                                <strong>Left:</strong> Start %.<br>
-                                <strong>Width:</strong> Length %.<br>
-                                (Locked for Single LED devices)
+                                <strong>Sequence Offset</strong><br>
+                                Delays the start of this effect. Use this to stack effects (e.g., Red first, then Blue).
+                            </div>
+                        </span>
+                    </div>
+
+                    <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+
+                    <div id="densityControls">
+                        <div style="display:flex; align-items:center; margin-bottom:10px;">
+                            <h4 style="margin:0; font-size:0.9rem;">Density & Flicker</h4>
+                            <div class="tooltip-container" onmouseenter="positionTooltip(this)">
+                                <span class="tooltip-icon">?</span>
+                                <div class="tooltip-text">
+                                    <strong>Density:</strong> % of LEDs lit (random noise). 0% = Solid Fill.<br>
+                                    <strong>Min/Max:</strong> Controls the duration (ms) a random sparkle stays ON
+                                    before moving.
+                                </div>
                             </div>
                         </div>
+
+                        <div class="input-row">
+                            <label>Density %</label>
+                            <input type="range" id="layerDensity" min="0" max="100" value="0"
+                                oninput="updateRangeDisplay('disp_den', this.value); updateLayerData()">
+                            <span id="disp_den" style="width:30px; text-align:right;">0</span>
+                        </div>
+                        <div class="input-row">
+                            <label>Flicker Min/Max</label>
+                            <input type="number" id="layerFmin" placeholder="Min" style="width:40px"
+                                oninput="updateLayerData()">
+                            <input type="number" id="layerFmax" placeholder="Max" style="width:40px"
+                                oninput="updateLayerData()">
+                        </div>
                     </div>
-                    
-                    <div class="input-row">
-                        <label>Left (Start)</label>
-                        <input type="range" id="layerAL" min="0" max="100" value="0" oninput="updateRangeDisplay('disp_al', this.value); updateLayerData()">
-                        <span id="disp_al" style="width:30px; text-align:right;">0</span>
-                    </div>
-                    <div class="input-row">
-                        <label>Width</label>
-                        <input type="range" id="layerAW" min="0" max="100" value="100" oninput="updateRangeDisplay('disp_aw', this.value); updateLayerData()">
-                        <span id="disp_aw" style="width:30px; text-align:right;">100</span>
+
+                    <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+
+                    <div id="areaControls">
+                        <div style="display:flex; align-items:center; margin-bottom:10px;">
+                            <h4 style="margin:0; font-size:0.9rem;">Position & Area</h4>
+                            <div class="tooltip-container" onmouseenter="positionTooltip(this)">
+                                <span class="tooltip-icon">?</span>
+                                <div class="tooltip-text">
+                                    <strong>Map to Strip</strong><br>
+                                    Defines where the effect appears.<br>
+                                    <strong>Left:</strong> Start %.<br>
+                                    <strong>Width:</strong> Length %.<br>
+                                    (Locked for Single LED devices)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-row">
+                            <label>Left (Start)</label>
+                            <input type="range" id="layerAL" min="0" max="100" value="0"
+                                oninput="updateRangeDisplay('disp_al', this.value); updateLayerData()">
+                            <span id="disp_al" style="width:30px; text-align:right;">0</span>
+                        </div>
+                        <div class="input-row">
+                            <label>Width</label>
+                            <input type="range" id="layerAW" min="0" max="100" value="100"
+                                oninput="updateRangeDisplay('disp_aw', this.value); updateLayerData()">
+                            <span id="disp_aw" style="width:30px; text-align:right;">100</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <button class="btn btn-success" style="width:100%" onclick="applyToSection()">Apply Layers to
+                Section</button>
         </div>
 
-        <button class="btn btn-success" style="width:100%" onclick="applyToSection()">Apply Layers to Section</button>
+        <div class="workspace">
+            <h3>Target Section</h3>
+            <div class="section-selector" id="sectionButtons"></div>
+
+            <div class="preview-container">
+                <div style="color:#aaa; font-size:0.9rem; margin-bottom:5px;">Real-Time Combined Simulation</div>
+                <div id="ledStrip" class="led-strip"></div>
+                <div class="layer-legend" id="previewLegend"></div>
+            </div>
+
+            <h3>Staged Output</h3>
+            <table
+                style="width:100%; border-collapse: collapse; font-size:0.85rem; background:white; margin-bottom:20px; border:1px solid #ddd;">
+                <thead style="background:#eee;">
+                    <tr>
+                        <th style="padding:8px; text-align:left;">Section</th>
+                        <th style="padding:8px; text-align:left;">Generated DOF String</th>
+                    </tr>
+                </thead>
+                <tbody id="stagingBody"></tbody>
+            </table>
+
+            <div style="display:flex; gap:10px; margin-top:auto;">
+                <button class="btn btn-primary" onclick="generateCSV()">Generate Final CSV</button>
+                <button class="btn btn-danger" onclick="clearAllData()">Clear Session Code</button>
+            </div>
+
+            <textarea id="finalOutput" readonly placeholder="CSV Output will appear here..."></textarea>
+        </div>
     </div>
 
-    <div class="workspace">
-        <h3>Target Section</h3>
-        <div class="section-selector" id="sectionButtons"></div>
+    <div id="glossaryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('glossaryModal').style.display='none'">&times;</span>
+            <h2>User Guide & Comprehensive Glossary</h2>
 
-        <div class="preview-container">
-            <div style="color:#aaa; font-size:0.9rem; margin-bottom:5px;">Real-Time Combined Simulation</div>
-            <div id="ledStrip" class="led-strip"></div>
-            <div class="layer-legend" id="previewLegend"></div>
+            <h3>1. Color Selection</h3>
+            <p>The <strong>Base Color</strong> determines the primary hue. The tool uses standard DOF additive mixing.
+            </p>
+            <div
+                style="background:#fff3cd; color:#856404; padding:10px; border-radius:4px; margin-bottom:15px; border:1px solid #ffeeba;">
+                <strong>Why can't I see Red-sparkles on a White background?</strong><br>
+                RGB LEDs use <strong>Additive Mixing</strong>. "White" is the combination of Red, Green, and Blue at
+                100% brightness. If you try to add "Red" on top of White, you are adding Red to a pixel that is already
+                100% Red. The result remains White. <br>
+                <em>To see a sparkle effect, the background must be a different color (e.g., Blue background + Red
+                    sparkle = Magenta flash) or a dimmer shade (e.g., Dim Gray).</em>
+            </div>
+
+            <h3>2. Effect Types & Timing</h3>
+            <p>This control changes the behavior of the light:</p>
+            <ul>
+                <li><strong>Static / On:</strong> Solid light. By default, it ignores the Duration and stays ON
+                    indefinitely (Background). Check <strong>"Sequence (Timed)"</strong> to limit its duration for
+                    sequencing.</li>
+                <li><strong>Blink:</strong> Toggles ON/OFF based on Duration.</li>
+                <li><strong>Pulse:</strong> Rhythmic fading.</li>
+                <li><strong>Flicker:</strong> Rapid strobe.</li>
+            </ul>
+
+            <h3>3. Density (AFDEN)</h3>
+            <p>Controls how "filled" the LED strip is. <strong>0%</strong> = Solid Fill. <strong>1%-99%</strong> =
+                Random Sparkle.</p>
+
+            <h3>4. Start Delay</h3>
+            <p>Delays the start of the effect. Use this to create sequences (e.g. Red for 500ms, then Blue for 500ms by
+                setting Blue's delay to 500).</p>
         </div>
-
-        <h3>Staged Output</h3>
-        <table style="width:100%; border-collapse: collapse; font-size:0.85rem; background:white; margin-bottom:20px; border:1px solid #ddd;">
-            <thead style="background:#eee;">
-                <tr><th style="padding:8px; text-align:left;">Section</th><th style="padding:8px; text-align:left;">Generated DOF String</th></tr>
-            </thead>
-            <tbody id="stagingBody"></tbody>
-        </table>
-
-        <div style="display:flex; gap:10px; margin-top:auto;">
-            <button class="btn btn-primary" onclick="generateCSV()">Generate Final CSV</button>
-            <button class="btn btn-danger" onclick="clearAllData()">Clear Session Code</button>
-        </div>
-        
-        <textarea id="finalOutput" readonly placeholder="CSV Output will appear here..."></textarea>
     </div>
-</div>
 
-<div id="glossaryModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="document.getElementById('glossaryModal').style.display='none'">&times;</span>
-        <h2>User Guide & Comprehensive Glossary</h2>
-        
-        <h3>1. Color Selection</h3>
-        <p>The <strong>Base Color</strong> determines the primary hue. The tool uses standard DOF additive mixing.</p>
-        <div style="background:#fff3cd; color:#856404; padding:10px; border-radius:4px; margin-bottom:15px; border:1px solid #ffeeba;">
-            <strong>Why can't I see Red sparkles on a White background?</strong><br>
-            RGB LEDs use <strong>Additive Mixing</strong>. "White" is the combination of Red, Green, and Blue at 100% brightness. If you try to add "Red" on top of White, you are adding Red to a pixel that is already 100% Red. The result remains White. <br>
-            <em>To see a sparkle effect, the background must be a different color (e.g., Blue background + Red sparkle = Magenta flash) or a dimmer shade (e.g., Dim Gray).</em>
-        </div>
+    <script>
+        // --- STATE MANAGEMENT ---
+        const STORAGE_KEY = 'dof_builder_v2';
 
-        <h3>2. Effect Types & Timing</h3>
-        <p>This control changes the behavior of the light:</p>
-        <ul>
-            <li><strong>Static / On:</strong> Solid light. By default, it ignores the Duration and stays ON indefinitely (Background). Check <strong>"Sequence (Timed)"</strong> to limit its duration for sequencing.</li>
-            <li><strong>Blink:</strong> Toggles ON/OFF based on Duration.</li>
-            <li><strong>Pulse:</strong> Rhythmic fading.</li>
-            <li><strong>Flicker:</strong> Rapid strobe.</li>
-        </ul>
-
-        <h3>3. Density (AFDEN)</h3>
-        <p>Controls how "filled" the LED strip is. <strong>0%</strong> = Solid Fill. <strong>1%-99%</strong> = Random Sparkle.</p>
-
-        <h3>4. Start Delay</h3>
-        <p>Delays the start of the effect. Use this to create sequences (e.g. Red for 500ms, then Blue for 500ms by setting Blue's delay to 500).</p>
-    </div>
-</div>
-
-<script>
-    // --- STATE MANAGEMENT ---
-    const STORAGE_KEY = 'dof_builder_v2';
-    
-    function saveState() {
-        const state = {
-            layers,
-            sectionConfigs,
-            activeSection,
-            currentLayerIdx,
-            eCode: document.getElementById('e_code').value
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
-
-    function loadState() {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if(raw) {
-            try {
-                const state = JSON.parse(raw);
-                if(state.layers) layers = state.layers;
-                if(state.sectionConfigs) sectionConfigs = state.sectionConfigs;
-                if(state.activeSection) activeSection = state.activeSection;
-                if(state.currentLayerIdx !== undefined) currentLayerIdx = state.currentLayerIdx;
-                if(state.eCode) document.getElementById('e_code').value = state.eCode;
-            } catch(e) {
-                console.error("Failed to load state", e);
-            }
-        }
-    }
-
-    function factoryReset() {
-        if(confirm("Factory Reset: This will clear all local storage and reload the tool. Are you sure?")) {
-            localStorage.removeItem(STORAGE_KEY);
-            location.reload();
-        }
-    }
-
-    // --- FULL COLOR LIBRARY ---
-    const allColors = [
-        {"name":"Black","hex":"#000000"},{"name":"White","hex":"#FFFFFF"},{"name":"Red","hex":"#FF0000"},{"name":"Lime","hex":"#00FF00"},
-        {"name":"Blue","hex":"#0000FF"},{"name":"Yellow","hex":"#FFFF00"},{"name":"Cyan","hex":"#00FFFF"},{"name":"Magenta","hex":"#FF00FF"},
-        {"name":"Silver","hex":"#C0C0C0"},{"name":"Gray","hex":"#808080"},{"name":"Maroon","hex":"#800000"},{"name":"Olive","hex":"#808000"},
-        {"name":"Green","hex":"#008000"},{"name":"Purple","hex":"#800080"},{"name":"Teal","hex":"#008080"},{"name":"Navy","hex":"#000080"},
-        {"name":"Orange","hex":"#FFA500"},{"name":"Gold","hex":"#FFD700"},{"name":"Indigo","hex":"#4B0082"},{"name":"Violet","hex":"#EE82EE"},
-        {"name":"Pink","hex":"#FFC0CB"},{"name":"Brown","hex":"#A52A2A"},{"name":"Coral","hex":"#FF7F50"},{"name":"Tomato","hex":"#FF6347"},
-        {"name":"Orange_red","hex":"#FF4500"},{"name":"Hot_pink","hex":"#FF69B4"},{"name":"Deep_pink","hex":"#FF1493"},{"name":"Pale_violet_red","hex":"#DB7093"},
-        {"name":"Medium_violet_red","hex":"#C71585"},{"name":"Dark_orange","hex":"#FF8C00"},{"name":"Khaki","hex":"#F0E68C"},{"name":"Dark_khaki","hex":"#BDB76B"},
-        {"name":"Plum","hex":"#DDA0DD"},{"name":"Orchid","hex":"#DA70D6"},{"name":"Medium_orchid","hex":"#BA55D3"},{"name":"Dark_orchid","hex":"#9932CC"},
-        {"name":"Dark_violet","hex":"#9400D3"},{"name":"Medium_purple","hex":"#9370DB"},{"name":"Slate_blue","hex":"#6A5ACD"},{"name":"Dark_slate_blue","hex":"#483D8B"},
-        {"name":"Medium_slate_blue","hex":"#7B68EE"},{"name":"Green_yellow","hex":"#ADFF2F"},{"name":"Chartreuse","hex":"#7FFF00"},{"name":"Lawn_green","hex":"#7CFC00"},
-        {"name":"Lime_green","hex":"#32CD32"},{"name":"Pale_green","hex":"#98FB98"},{"name":"Light_green","hex":"#90EE90"},{"name":"Medium_spring_green","hex":"#00FA9A"},
-        {"name":"Spring_green","hex":"#00FF7F"},{"name":"Medium_sea_green","hex":"#3CB371"},{"name":"Sea_green","hex":"#2E8B57"},{"name":"Forest_green","hex":"#228B22"},
-        {"name":"Dark_green","hex":"#006400"},{"name":"Yellow_green","hex":"#9ACD32"},{"name":"Olive_drab","hex":"#6B8E23"},{"name":"Dark_olive_green","hex":"#556B2F"},
-        {"name":"Medium_aquamarine","hex":"#66CDAA"},{"name":"Dark_sea_green","hex":"#8FBC8F"},{"name":"Light_sea_green","hex":"#20B2AA"},{"name":"Dark_cyan","hex":"#008B8B"},
-        {"name":"Aqua","hex":"#00FFFF"},{"name":"Light_cyan","hex":"#E0FFFF"},{"name":"Pale_turquoise","hex":"#AFEEEE"},{"name":"Aquamarine","hex":"#7FFFD4"},
-        {"name":"Turquoise","hex":"#40E0D0"},{"name":"Medium_turquoise","hex":"#48D1CC"},{"name":"Dark_turquoise","hex":"#00CED1"},{"name":"Cadet_blue","hex":"#5F9EA0"},
-        {"name":"Steel_blue","hex":"#4682B4"},{"name":"Light_steel_blue","hex":"#B0C4DE"},{"name":"Powder_blue","hex":"#B0E0E6"},{"name":"Light_blue","hex":"#ADD8E6"},
-        {"name":"Sky_blue","hex":"#87CEEB"},{"name":"Light_sky_blue","hex":"#87CEFA"},{"name":"Deep_sky_blue","hex":"#00BFFF"},{"name":"Dodger_blue","hex":"#1E90FF"},
-        {"name":"Cornflower_blue","hex":"#6495ED"},{"name":"Royal_blue","hex":"#4169E1"},{"name":"Medium_blue","hex":"#0000CD"},{"name":"Dark_blue","hex":"#00008B"},
-        {"name":"Midnight_blue","hex":"#191970"},{"name":"Cornsilk","hex":"#FFF8DC"},{"name":"Blanched_almond","hex":"#FFEBCD"},{"name":"Bisque","hex":"#FFE4C4"},
-        {"name":"Navajo_white","hex":"#FFDEAD"},{"name":"Wheat","hex":"#F5DEB3"},{"name":"Burly_wood","hex":"#DEB887"},{"name":"Tan","hex":"#D2B48C"},
-        {"name":"Rosy_brown","hex":"#BC8F8F"},{"name":"Sandy_brown","hex":"#F4A460"},{"name":"Goldenrod","hex":"#DAA520"},{"name":"Dark_goldenrod","hex":"#B8860B"},
-        {"name":"Peru","hex":"#CD853F"},{"name":"Chocolate","hex":"#D2691E"},{"name":"Saddle_brown","hex":"#8B4513"},{"name":"Sienna","hex":"#A0522D"},
-        {"name":"Snow","hex":"#FFFAFA"},{"name":"Honeydew","hex":"#F0FFF0"},{"name":"Mint_cream","hex":"#F5FFFA"},{"name":"Azure","hex":"#F0FFFF"},
-        {"name":"Alice_blue","hex":"#F0F8FF"},{"name":"Ghost_white","hex":"#F8F8FF"},{"name":"White_smoke","hex":"#F5F5F5"},{"name":"Seashell","hex":"#FFF5EE"},
-        {"name":"Beige","hex":"#F5F5DC"},{"name":"Old_lace","hex":"#FDF5E6"},{"name":"Floral_white","hex":"#FFFAF0"},{"name":"Ivory","hex":"#FFFFF0"},
-        {"name":"Antique_white","hex":"#FAEBD7"},{"name":"Linen","hex":"#FAF0E6"},{"name":"Lavender_blush","hex":"#FFF0F5"},{"name":"Misty_rose","hex":"#FFE4E1"},
-        {"name":"Gainsboro","hex":"#DCDCDC"},{"name":"Light_gray","hex":"#D3D3D3"},{"name":"Dark_gray","hex":"#A9A9A9"},{"name":"Dim_gray","hex":"#696969"},
-        {"name":"Light_slate_gray","hex":"#778899"},{"name":"Slate_gray","hex":"#708090"},{"name":"Dark_slate_gray","hex":"#2F4F4F"},{"name":"Lavender","hex":"#E6E6FA"}
-    ];
-
-    const sections = [
-        "PF Left Effects MX HD", "PF Right Effects MX HD", 
-        "Flipper Button MX", "Magnasave Left MX", "Magnasave Right MX", "Fire MX",
-        "RGB Undercab Complex MX", "RGB Undercab Smart", 
-        "RGB Flipper", "RGB Left Magnasave", "RGB Right Magnasave", "RGB Fire Button"
-    ];
-    
-    const singleLedSections = [
-        "Flipper Button MX", "Magnasave Left MX", "Magnasave Right MX", "Fire MX",
-        "RGB Flipper", "RGB Left Magnasave", "RGB Right Magnasave", "RGB Fire Button"
-    ];
-
-    let layers = [
-        { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
-        { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
-        { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
-        { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 }
-    ];
-    
-    let pixelStates = []; 
-    let currentLayerIdx = 0;
-    let sectionConfigs = {}; 
-    let activeSection = sections[0];
-    let previewAnimationFrame = null;
-
-    // --- INIT ---
-    window.onload = function() {
-        initColors();
-        initSectionButtons();
-        initLedStrip();
-        initPixelStates();
-        
-        loadState(); // LOAD FROM STORAGE
-        
-        loadLayerToUI(currentLayerIdx);
-        // Refresh buttons and staging area based on loaded state
-        const btns = document.querySelectorAll('.section-btn');
-        btns.forEach(b => {
-            b.classList.toggle('active', b.innerText === activeSection);
-        });
-        renderStaging();
-        checkSingleLedLock(); 
-        updateTabIndicators();
-        
-        startPreviewLoop();
-    };
-
-    function initColors() {
-        const grid = document.getElementById('colorGrid');
-        allColors.forEach(c => {
-            let d = document.createElement('div');
-            d.className = 'color-swatch';
-            d.style.backgroundColor = c.hex;
-            d.title = c.name;
-            d.onclick = () => setLayerColor(c.name, c.hex, d);
-            grid.appendChild(d);
-        });
-    }
-
-    function initLedStrip() {
-        const strip = document.getElementById('ledStrip');
-        for(let i=0; i<100; i++) {
-            let d = document.createElement('div');
-            d.className = 'led';
-            d.id = 'led_' + i;
-            strip.appendChild(d);
-        }
-    }
-
-    function initPixelStates() {
-        pixelStates = [];
-        for(let l=0; l<4; l++) {
-            let layerPixels = [];
-            for(let p=0; p<100; p++) {
-                layerPixels.push({ nextChange: 0, isOn: false });
-            }
-            pixelStates.push(layerPixels);
-        }
-    }
-
-    function initSectionButtons() {
-        const container = document.getElementById('sectionButtons');
-        container.innerHTML = ''; // Clear for reload safety
-        sections.forEach((s, idx) => {
-            if(!sectionConfigs[s]) sectionConfigs[s] = "";
-            let btn = document.createElement('button');
-            btn.className = `section-btn ${s === activeSection ? 'active' : ''}`;
-            btn.innerText = s;
-            btn.onclick = () => {
-                document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                activeSection = s;
-                checkSingleLedLock();
-                saveState();
+        function saveState() {
+            const state = {
+                layers,
+                sectionConfigs,
+                activeSection,
+                currentLayerIdx,
+                eCode: document.getElementById('e_code').value
             };
-            container.appendChild(btn);
-        });
-        renderStaging();
-    }
-    
-    function checkSingleLedLock() {
-        const isSingle = singleLedSections.includes(activeSection);
-        const areaControls = document.getElementById('areaControls');
-        const densityControls = document.getElementById('densityControls');
-        
-        if(isSingle) {
-            areaControls.classList.add('disabled-overlay');
-            densityControls.classList.add('disabled-overlay');
-        } else {
-            areaControls.classList.remove('disabled-overlay');
-            densityControls.classList.remove('disabled-overlay');
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
-    }
 
-    // --- LAYER LOGIC ---
-    function switchLayer(idx) {
-        currentLayerIdx = idx;
-        document.querySelectorAll('.layer-tab').forEach((t, i) => {
-            t.classList.toggle('active', i === idx);
-        });
-        loadLayerToUI(idx);
-        saveState();
-    }
-
-    function loadLayerToUI(idx) {
-        const d = layers[idx];
-        document.getElementById('layerColorName').value = d.color || "None";
-        document.getElementById('layerEffect').value = d.effect;
-        document.getElementById('layerDuration').value = d.duration;
-        document.getElementById('layerTimed').checked = d.timed;
-        document.getElementById('layerDelay').value = d.delay;
-        document.getElementById('layerDensity').value = d.density;
-        document.getElementById('disp_den').innerText = d.density;
-        document.getElementById('layerFmin').value = d.fmin;
-        document.getElementById('layerFmax').value = d.fmax;
-        document.getElementById('layerAL').value = d.al;
-        document.getElementById('disp_al').innerText = d.al;
-        document.getElementById('layerAW').value = d.aw;
-        document.getElementById('disp_aw').innerText = d.aw;
-        
-        handleDurationVisibility();
-    }
-
-    function setLayerColor(name, hex, el) {
-        layers[currentLayerIdx].active = true;
-        layers[currentLayerIdx].color = name;
-        layers[currentLayerIdx].hex = hex;
-        document.getElementById('layerColorName').value = name;
-        
-        document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
-        if(el) el.classList.add('selected');
-
-        updateTabIndicators();
-        saveState();
-    }
-
-    function clearCurrentLayer() {
-        layers[currentLayerIdx] = { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 };
-        loadLayerToUI(currentLayerIdx);
-        updateTabIndicators();
-        saveState();
-    }
-
-    function updateLayerData() {
-        const d = layers[currentLayerIdx];
-        d.effect = document.getElementById('layerEffect').value;
-        d.duration = parseInt(document.getElementById('layerDuration').value) || 1000;
-        d.timed = document.getElementById('layerTimed').checked;
-        d.delay = parseInt(document.getElementById('layerDelay').value) || 0;
-        d.density = parseInt(document.getElementById('layerDensity').value);
-        d.fmin = parseInt(document.getElementById('layerFmin').value) || 50;
-        d.fmax = parseInt(document.getElementById('layerFmax').value) || 150;
-        d.al = parseInt(document.getElementById('layerAL').value);
-        d.aw = parseInt(document.getElementById('layerAW').value);
-        
-        handleDurationVisibility();
-        saveState();
-    }
-    
-    function handleDurationVisibility() {
-        const eff = document.getElementById('layerEffect').value;
-        const durInput = document.getElementById('layerDuration');
-        const timeCheck = document.getElementById('layerTimed');
-        
-        if(eff === "" || eff === "On") {
-            // Static/On Mode
-            timeCheck.disabled = false;
-            if(timeCheck.checked) {
-                durInput.disabled = false;
-                durInput.style.opacity = 1;
-            } else {
-                durInput.disabled = true;
-                durInput.style.opacity = 0.5;
-            }
-        } else {
-            // Blink/Pulse/Flicker (Always Timed)
-            timeCheck.checked = true;
-            timeCheck.disabled = true;
-            durInput.disabled = false;
-            durInput.style.opacity = 1;
-        }
-    }
-
-    function updateRangeDisplay(id, val) {
-        document.getElementById(id).innerText = val;
-    }
-
-    function updateTabIndicators() {
-        document.querySelectorAll('.layer-tab').forEach((t, i) => {
-            t.classList.toggle('has-data', layers[i].active);
-        });
-        updateLegend();
-    }
-
-    function updateLegend() {
-        const con = document.getElementById('previewLegend');
-        con.innerHTML = '';
-        layers.forEach((l, i) => {
-            if(l.active) {
-                con.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${l.hex}"></div> Layer ${i+1}</div>`;
-            }
-        });
-    }
-
-    // --- ADDITIVE COLOR MIXING ---
-    function hexToRgb(hex) {
-        const bigint = parseInt(hex.substring(1), 16);
-        return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
-    }
-    function rgbToHex(r, g, b) {
-        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-    }
-    function addColors(hex1, hex2) {
-        const c1 = hexToRgb(hex1);
-        const c2 = hexToRgb(hex2);
-        const r = Math.min(255, c1.r + c2.r);
-        const g = Math.min(255, c1.g + c2.g);
-        const b = Math.min(255, c1.b + c2.b);
-        return rgbToHex(r, g, b);
-    }
-
-    // --- TOOLTIP POSITIONING ---
-    function positionTooltip(el) {
-        const text = el.querySelector('.tooltip-text');
-        const rect = el.getBoundingClientRect();
-        text.style.top = rect.top + 'px';
-        text.style.left = (rect.right + 10) + 'px';
-    }
-
-    // --- TIMELINE ENGINE ---
-    function startPreviewLoop() {
-        if(previewAnimationFrame) cancelAnimationFrame(previewAnimationFrame);
-        
-        function loop() {
-            // Determine Sequence Length
-            let maxDuration = 0;
-            let anyTimed = false;
-            
-            layers.forEach(l => {
-                if(l.active && l.timed) {
-                    anyTimed = true;
-                    const end = l.delay + l.duration; 
-                    if(end > maxDuration) maxDuration = end;
+        function loadState() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                try {
+                    const state = JSON.parse(raw);
+                    if (state.layers) layers = state.layers;
+                    if (state.sectionConfigs) sectionConfigs = state.sectionConfigs;
+                    if (state.activeSection) activeSection = state.activeSection;
+                    if (state.currentLayerIdx !== undefined) currentLayerIdx = state.currentLayerIdx;
+                    if (state.eCode) document.getElementById('e_code').value = state.eCode;
+                } catch (e) {
+                    console.error("Failed to load state", e);
                 }
+            }
+        }
+
+        function factoryReset() {
+            if (confirm("Factory Reset: This will clear all local storage and reload the tool. Are you sure?")) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        // --- FULL COLOR LIBRARY ---
+        const allColors = [
+            { "name": "Black", "hex": "#000000" }, { "name": "White", "hex": "#FFFFFF" }, { "name": "Red", "hex": "#FF0000" }, { "name": "Lime", "hex": "#00FF00" },
+            { "name": "Blue", "hex": "#0000FF" }, { "name": "Yellow", "hex": "#FFFF00" }, { "name": "Cyan", "hex": "#00FFFF" }, { "name": "Magenta", "hex": "#FF00FF" },
+            { "name": "Silver", "hex": "#C0C0C0" }, { "name": "Gray", "hex": "#808080" }, { "name": "Maroon", "hex": "#800000" }, { "name": "Olive", "hex": "#808000" },
+            { "name": "Green", "hex": "#008000" }, { "name": "Purple", "hex": "#800080" }, { "name": "Teal", "hex": "#008080" }, { "name": "Navy", "hex": "#000080" },
+            { "name": "Orange", "hex": "#FFA500" }, { "name": "Gold", "hex": "#FFD700" }, { "name": "Indigo", "hex": "#4B0082" }, { "name": "Violet", "hex": "#EE82EE" },
+            { "name": "Pink", "hex": "#FFC0CB" }, { "name": "Brown", "hex": "#A52A2A" }, { "name": "Coral", "hex": "#FF7F50" }, { "name": "Tomato", "hex": "#FF6347" },
+            { "name": "Orange_red", "hex": "#FF4500" }, { "name": "Hot_pink", "hex": "#FF69B4" }, { "name": "Deep_pink", "hex": "#FF1493" }, { "name": "Pale_violet_red", "hex": "#DB7093" },
+            { "name": "Medium_violet_red", "hex": "#C71585" }, { "name": "Dark_orange", "hex": "#FF8C00" }, { "name": "Khaki", "hex": "#F0E68C" }, { "name": "Dark_khaki", "hex": "#BDB76B" },
+            { "name": "Plum", "hex": "#DDA0DD" }, { "name": "Orchid", "hex": "#DA70D6" }, { "name": "Medium_orchid", "hex": "#BA55D3" }, { "name": "Dark_orchid", "hex": "#9932CC" },
+            { "name": "Dark_violet", "hex": "#9400D3" }, { "name": "Medium_purple", "hex": "#9370DB" }, { "name": "Slate_blue", "hex": "#6A5ACD" }, { "name": "Dark_slate_blue", "hex": "#483D8B" },
+            { "name": "Medium_slate_blue", "hex": "#7B68EE" }, { "name": "Green_yellow", "hex": "#ADFF2F" }, { "name": "Chartreuse", "hex": "#7FFF00" }, { "name": "Lawn_green", "hex": "#7CFC00" },
+            { "name": "Lime_green", "hex": "#32CD32" }, { "name": "Pale_green", "hex": "#98FB98" }, { "name": "Light_green", "hex": "#90EE90" }, { "name": "Medium_spring_green", "hex": "#00FA9A" },
+            { "name": "Spring_green", "hex": "#00FF7F" }, { "name": "Medium_sea_green", "hex": "#3CB371" }, { "name": "Sea_green", "hex": "#2E8B57" }, { "name": "Forest_green", "hex": "#228B22" },
+            { "name": "Dark_green", "hex": "#006400" }, { "name": "Yellow_green", "hex": "#9ACD32" }, { "name": "Olive_drab", "hex": "#6B8E23" }, { "name": "Dark_olive_green", "hex": "#556B2F" },
+            { "name": "Medium_aquamarine", "hex": "#66CDAA" }, { "name": "Dark_sea_green", "hex": "#8FBC8F" }, { "name": "Light_sea_green", "hex": "#20B2AA" }, { "name": "Dark_cyan", "hex": "#008B8B" },
+            { "name": "Aqua", "hex": "#00FFFF" }, { "name": "Light_cyan", "hex": "#E0FFFF" }, { "name": "Pale_turquoise", "hex": "#AFEEEE" }, { "name": "Aquamarine", "hex": "#7FFFD4" },
+            { "name": "Turquoise", "hex": "#40E0D0" }, { "name": "Medium_turquoise", "hex": "#48D1CC" }, { "name": "Dark_turquoise", "hex": "#00CED1" }, { "name": "Cadet_blue", "hex": "#5F9EA0" },
+            { "name": "Steel_blue", "hex": "#4682B4" }, { "name": "Light_steel_blue", "hex": "#B0C4DE" }, { "name": "Powder_blue", "hex": "#B0E0E6" }, { "name": "Light_blue", "hex": "#ADD8E6" },
+            { "name": "Sky_blue", "hex": "#87CEEB" }, { "name": "Light_sky_blue", "hex": "#87CEFA" }, { "name": "Deep_sky_blue", "hex": "#00BFFF" }, { "name": "Dodger_blue", "hex": "#1E90FF" },
+            { "name": "Cornflower_blue", "hex": "#6495ED" }, { "name": "Royal_blue", "hex": "#4169E1" }, { "name": "Medium_blue", "hex": "#0000CD" }, { "name": "Dark_blue", "hex": "#00008B" },
+            { "name": "Midnight_blue", "hex": "#191970" }, { "name": "Cornsilk", "hex": "#FFF8DC" }, { "name": "Blanched_almond", "hex": "#FFEBCD" }, { "name": "Bisque", "hex": "#FFE4C4" },
+            { "name": "Navajo_white", "hex": "#FFDEAD" }, { "name": "Wheat", "hex": "#F5DEB3" }, { "name": "Burly_wood", "hex": "#DEB887" }, { "name": "Tan", "hex": "#D2B48C" },
+            { "name": "Rosy_brown", "hex": "#BC8F8F" }, { "name": "Sandy_brown", "hex": "#F4A460" }, { "name": "Goldenrod", "hex": "#DAA520" }, { "name": "Dark_goldenrod", "hex": "#B8860B" },
+            { "name": "Peru", "hex": "#CD853F" }, { "name": "Chocolate", "hex": "#D2691E" }, { "name": "Saddle_brown", "hex": "#8B4513" }, { "name": "Sienna", "hex": "#A0522D" },
+            { "name": "Snow", "hex": "#FFFAFA" }, { "name": "Honeydew", "hex": "#F0FFF0" }, { "name": "Mint_cream", "hex": "#F5FFFA" }, { "name": "Azure", "hex": "#F0FFFF" },
+            { "name": "Alice_blue", "hex": "#F0F8FF" }, { "name": "Ghost_white", "hex": "#F8F8FF" }, { "name": "White_smoke", "hex": "#F5F5F5" }, { "name": "Seashell", "hex": "#FFF5EE" },
+            { "name": "Beige", "hex": "#F5F5DC" }, { "name": "Old_lace", "hex": "#FDF5E6" }, { "name": "Floral_white", "hex": "#FFFAF0" }, { "name": "Ivory", "hex": "#FFFFF0" },
+            { "name": "Antique_white", "hex": "#FAEBD7" }, { "name": "Linen", "hex": "#FAF0E6" }, { "name": "Lavender_blush", "hex": "#FFF0F5" }, { "name": "Misty_rose", "hex": "#FFE4E1" },
+            { "name": "Gainsboro", "hex": "#DCDCDC" }, { "name": "Light_gray", "hex": "#D3D3D3" }, { "name": "Dark_gray", "hex": "#A9A9A9" }, { "name": "Dim_gray", "hex": "#696969" },
+            { "name": "Light_slate_gray", "hex": "#778899" }, { "name": "Slate_gray", "hex": "#708090" }, { "name": "Dark_slate_gray", "hex": "#2F4F4F" }, { "name": "Lavender", "hex": "#E6E6FA" }
+        ];
+
+        const sections = [
+            "PF Left Effects MX HD", "PF Right Effects MX HD",
+            "Flipper Button MX", "Magnasave Left MX", "Magnasave Right MX", "Fire MX",
+            "RGB Undercab Complex MX", "RGB Undercab Smart",
+            "RGB Flipper", "RGB Left Magnasave", "RGB Right Magnasave", "RGB Fire Button"
+        ];
+
+        const singleLedSections = [
+            "Flipper Button MX", "Magnasave Left MX", "Magnasave Right MX", "Fire MX",
+            "RGB Flipper", "RGB Left Magnasave", "RGB Right Magnasave", "RGB Fire Button"
+        ];
+
+        let layers = [
+            { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
+            { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
+            { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 },
+            { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 }
+        ];
+
+        let pixelStates = [];
+        let currentLayerIdx = 0;
+        let sectionConfigs = {};
+        let activeSection = sections[0];
+        let previewAnimationFrame = null;
+
+        // --- INIT ---
+        window.onload = function () {
+            initColors();
+            initSectionButtons();
+            initLedStrip();
+            initPixelStates();
+
+            loadState(); // LOAD FROM STORAGE
+
+            loadLayerToUI(currentLayerIdx);
+            // Refresh buttons and staging area based on loaded state
+            const btns = document.querySelectorAll('.section-btn');
+            btns.forEach(b => {
+                b.classList.toggle('active', b.innerText === activeSection);
             });
-            
-            if(!anyTimed) maxDuration = 2000; // Default view loop
-            if(maxDuration === 0) maxDuration = 2000;
-
-            const globalTime = Date.now() % maxDuration; 
-            const stripColors = new Array(100).fill('#000000'); 
-
-            layers.forEach((layer, lIdx) => {
-                if(!layer.active) return;
-
-                const startTime = layer.delay;
-                const endTime = layer.timed ? (layer.delay + layer.duration) : Infinity;
-                
-                // Active Window Check
-                if(globalTime < startTime) return;
-                if(layer.timed && globalTime > endTime) return;
-
-                // Local Behavior
-                let layerActive = true;
-                const relativeTime = globalTime - startTime;
-
-                if(layer.effect === 'Blink') {
-                    if((relativeTime % 500) > 250) layerActive = false;
-                }
-                else if(layer.effect === 'Flicker') {
-                    if((Date.now() % 100) > 50) layerActive = false;
-                }
-
-                if(!layerActive) return;
-
-                // Density & Area
-                let start = Math.floor(layer.al);
-                let end = Math.min(100, start + layer.aw);
-                let effectiveDensity = layer.density;
-                
-                if(singleLedSections.includes(activeSection)) {
-                    start = 0; end = 100; effectiveDensity = 0; 
-                }
-
-                if(effectiveDensity === 0) {
-                    for(let i=start; i<end; i++) stripColors[i] = addColors(stripColors[i], layer.hex);
-                } else {
-                    const rangeSize = end - start;
-                    const targetCount = Math.floor((effectiveDensity / 100) * rangeSize);
-                    let activeCount = 0;
-                    
-                    for(let i=start; i<end; i++) {
-                        const pState = pixelStates[lIdx][i];
-                        if(pState.isOn) {
-                            if(Date.now() > pState.nextChange) pState.isOn = false;
-                            else activeCount++;
-                        }
-                    }
-                    
-                    if(activeCount < targetCount) {
-                        let attempts = 0;
-                        while(activeCount < targetCount && attempts < 20) {
-                            const rndIdx = Math.floor(Math.random() * rangeSize) + start;
-                            if(!pixelStates[lIdx][rndIdx].isOn) {
-                                pixelStates[lIdx][rndIdx].isOn = true;
-                                pixelStates[lIdx][rndIdx].nextChange = Date.now() + Math.floor(Math.random() * (layer.fmax - layer.fmin + 1)) + layer.fmin;
-                                activeCount++;
-                            }
-                            attempts++;
-                        }
-                    }
-                    
-                    for(let i=start; i<end; i++) {
-                        if(pixelStates[lIdx][i].isOn) stripColors[i] = addColors(stripColors[i], layer.hex);
-                    }
-                }
-            });
-
-            // Draw
-            for(let i=0; i<100; i++) {
-                const led = document.getElementById('led_'+i);
-                led.style.backgroundColor = stripColors[i];
-                led.style.boxShadow = stripColors[i] !== '#000000' ? `0 0 5px ${stripColors[i]}` : 'none';
-            }
-            
-            previewAnimationFrame = requestAnimationFrame(loop);
-        }
-        
-        previewAnimationFrame = requestAnimationFrame(loop);
-    }
-
-    // --- OUTPUT ---
-    function generateString() {
-        let commands = [];
-        const isSingle = singleLedSections.includes(activeSection);
-        
-        layers.forEach(l => {
-            if(!l.active) return;
-            
-            let parts = [l.color];
-            
-            if(l.effect && l.effect !== 'Static') parts.push(l.effect);
-            
-            // Output Duration only if timed/needed
-            if(l.effect === 'Blink' || l.effect === 'Pulse' || l.effect === 'Flicker' || (l.timed && (l.effect==='' || l.effect==='On'))) {
-                if(l.duration) parts.push(l.duration);
-            }
-            
-            if(!isSingle) {
-                if(l.al !== 0) parts.push(`AL${l.al}`);
-                if(l.aw !== 100) parts.push(`AW${l.aw}`);
-            }
-            
-            if(!isSingle && l.density > 0) {
-                parts.push(`AFDEN${l.density}`);
-                if(l.fmin) parts.push(`AFMIN${l.fmin}`);
-                if(l.fmax) parts.push(`AFMAX${l.fmax}`);
-            }
-
-            commands.push(parts.join(' '));
-        });
-
-        return commands.join(' / ');
-    }
-
-    function applyToSection() {
-        const eCode = document.getElementById('e_code').value.trim();
-        if(!eCode) { alert("Please enter E Code"); return; }
-        
-        const str = generateString();
-        if(!str) { alert("No active layers."); return; }
-        
-        const segments = str.split(' / ');
-        const finalStr = segments.map(seg => `${eCode} ${seg}`).join('/');
-
-        sectionConfigs[activeSection] = finalStr;
-        saveState();
-        renderStaging();
-    }
-
-    function renderStaging() {
-        const tbody = document.getElementById('stagingBody');
-        tbody.innerHTML = "";
-        sections.forEach(s => {
-            let row = document.createElement('tr');
-            let val = sectionConfigs[s];
-            row.innerHTML = `<td style="font-weight:bold; color:#555;">${s}</td><td style="font-family:monospace; color:${val?'#2c3e50':'#ccc'}">${val || '—'}</td>`;
-            tbody.appendChild(row);
-        });
-    }
-
-    function generateCSV() {
-        const eCode = document.getElementById('e_code').value.trim();
-        if(!eCode) { alert("E Code required"); return; }
-
-        let csv = "E Code," + sections.join(",") + "\n";
-        let row = [eCode];
-        sections.forEach(s => {
-            let val = sectionConfigs[s] || "";
-            row.push(`"${val}"`);
-        });
-        csv += row.join(",");
-
-        document.getElementById('finalOutput').value = csv;
-        document.getElementById('finalOutput').select();
-    }
-
-    function clearAllData() {
-        if(confirm("Clear current session code? (This does not reset layers)")) {
-            sectionConfigs = {};
-            sections.forEach(s => sectionConfigs[s] = "");
             renderStaging();
+            checkSingleLedLock();
+            updateTabIndicators();
+
+            startPreviewLoop();
+        };
+
+        function initColors() {
+            const grid = document.getElementById('colorGrid');
+            allColors.forEach(c => {
+                let d = document.createElement('div');
+                d.className = 'color-swatch';
+                d.style.backgroundColor = c.hex;
+                d.title = c.name;
+                d.onclick = () => setLayerColor(c.name, c.hex, d);
+                grid.appendChild(d);
+            });
+        }
+
+        function initLedStrip() {
+            const strip = document.getElementById('ledStrip');
+            for (let i = 0; i < 100; i++) {
+                let d = document.createElement('div');
+                d.className = 'led';
+                d.id = 'led_' + i;
+                strip.appendChild(d);
+            }
+        }
+
+        function initPixelStates() {
+            pixelStates = [];
+            for (let l = 0; l < 4; l++) {
+                let layerPixels = [];
+                for (let p = 0; p < 100; p++) {
+                    layerPixels.push({ nextChange: 0, isOn: false });
+                }
+                pixelStates.push(layerPixels);
+            }
+        }
+
+        function initSectionButtons() {
+            const container = document.getElementById('sectionButtons');
+            container.innerHTML = ''; // Clear for reload safety
+            sections.forEach((s, idx) => {
+                if (!sectionConfigs[s]) sectionConfigs[s] = "";
+                let btn = document.createElement('button');
+                btn.className = `section-btn ${s === activeSection ? 'active' : ''}`;
+                btn.innerText = s;
+                btn.onclick = () => {
+                    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeSection = s;
+                    checkSingleLedLock();
+                    saveState();
+                };
+                container.appendChild(btn);
+            });
+            renderStaging();
+        }
+
+        function checkSingleLedLock() {
+            const isSingle = singleLedSections.includes(activeSection);
+            const areaControls = document.getElementById('areaControls');
+            const densityControls = document.getElementById('densityControls');
+
+            if (isSingle) {
+                areaControls.classList.add('disabled-overlay');
+                densityControls.classList.add('disabled-overlay');
+            } else {
+                areaControls.classList.remove('disabled-overlay');
+                densityControls.classList.remove('disabled-overlay');
+            }
+        }
+
+        // --- LAYER LOGIC ---
+        function switchLayer(idx) {
+            currentLayerIdx = idx;
+            document.querySelectorAll('.layer-tab').forEach((t, i) => {
+                t.classList.toggle('active', i === idx);
+            });
+            loadLayerToUI(idx);
             saveState();
         }
-    }
-</script>
+
+        function loadLayerToUI(idx) {
+            const d = layers[idx];
+            document.getElementById('layerColorName').value = d.color || "None";
+            document.getElementById('layerEffect').value = d.effect;
+            document.getElementById('layerDuration').value = d.duration;
+            document.getElementById('layerTimed').checked = d.timed;
+            document.getElementById('layerDelay').value = d.delay;
+            document.getElementById('layerDensity').value = d.density;
+            document.getElementById('disp_den').innerText = d.density;
+            document.getElementById('layerFmin').value = d.fmin;
+            document.getElementById('layerFmax').value = d.fmax;
+            document.getElementById('layerAL').value = d.al;
+            document.getElementById('disp_al').innerText = d.al;
+            document.getElementById('layerAW').value = d.aw;
+            document.getElementById('disp_aw').innerText = d.aw;
+
+            handleDurationVisibility();
+        }
+
+        function setLayerColor(name, hex, el) {
+            layers[currentLayerIdx].active = true;
+            layers[currentLayerIdx].color = name;
+            layers[currentLayerIdx].hex = hex;
+            document.getElementById('layerColorName').value = name;
+
+            document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+            if (el) el.classList.add('selected');
+
+            updateTabIndicators();
+            saveState();
+        }
+
+        function clearCurrentLayer() {
+            layers[currentLayerIdx] = { active: false, color: '', hex: '#000000', effect: '', duration: 1000, timed: false, delay: 0, density: 0, fmin: '', fmax: '', al: 0, aw: 100 };
+            loadLayerToUI(currentLayerIdx);
+            updateTabIndicators();
+            saveState();
+        }
+
+        function updateLayerData() {
+            const d = layers[currentLayerIdx];
+            d.effect = document.getElementById('layerEffect').value;
+            d.duration = parseInt(document.getElementById('layerDuration').value) || 1000;
+            d.timed = document.getElementById('layerTimed').checked;
+            d.delay = parseInt(document.getElementById('layerDelay').value) || 0;
+            d.density = parseInt(document.getElementById('layerDensity').value);
+            d.fmin = parseInt(document.getElementById('layerFmin').value) || 50;
+            d.fmax = parseInt(document.getElementById('layerFmax').value) || 150;
+            d.al = parseInt(document.getElementById('layerAL').value);
+            d.aw = parseInt(document.getElementById('layerAW').value);
+
+            handleDurationVisibility();
+            saveState();
+        }
+
+        function handleDurationVisibility() {
+            const eff = document.getElementById('layerEffect').value;
+            const durInput = document.getElementById('layerDuration');
+            const timeCheck = document.getElementById('layerTimed');
+
+            if (eff === "" || eff === "On") {
+                // Static/On Mode
+                timeCheck.disabled = false;
+                if (timeCheck.checked) {
+                    durInput.disabled = false;
+                    durInput.style.opacity = 1;
+                } else {
+                    durInput.disabled = true;
+                    durInput.style.opacity = 0.5;
+                }
+            } else {
+                // Blink/Pulse/Flicker (Always Timed)
+                timeCheck.checked = true;
+                timeCheck.disabled = true;
+                durInput.disabled = false;
+                durInput.style.opacity = 1;
+            }
+        }
+
+        function updateRangeDisplay(id, val) {
+            document.getElementById(id).innerText = val;
+        }
+
+        function updateTabIndicators() {
+            document.querySelectorAll('.layer-tab').forEach((t, i) => {
+                t.classList.toggle('has-data', layers[i].active);
+            });
+            updateLegend();
+        }
+
+        function updateLegend() {
+            const con = document.getElementById('previewLegend');
+            con.innerHTML = '';
+            layers.forEach((l, i) => {
+                if (l.active) {
+                    con.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${l.hex}"></div> Layer ${i + 1}</div>`;
+                }
+            });
+        }
+
+        // --- ADDITIVE COLOR MIXING ---
+        function hexToRgb(hex) {
+            const bigint = parseInt(hex.substring(1), 16);
+            return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
+        }
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+        function addColors(hex1, hex2) {
+            const c1 = hexToRgb(hex1);
+            const c2 = hexToRgb(hex2);
+            const r = Math.min(255, c1.r + c2.r);
+            const g = Math.min(255, c1.g + c2.g);
+            const b = Math.min(255, c1.b + c2.b);
+            return rgbToHex(r, g, b);
+        }
+
+        // --- TOOLTIP POSITIONING ---
+        function positionTooltip(el) {
+            const text = el.querySelector('.tooltip-text');
+            const rect = el.getBoundingClientRect();
+            text.style.top = rect.top + 'px';
+            text.style.left = (rect.right + 10) + 'px';
+        }
+
+        // --- TIMELINE ENGINE ---
+        function startPreviewLoop() {
+            if (previewAnimationFrame) cancelAnimationFrame(previewAnimationFrame);
+
+            function loop() {
+                // Determine Sequence Length
+                let maxDuration = 0;
+                let anyTimed = false;
+
+                layers.forEach(l => {
+                    if (l.active && l.timed) {
+                        anyTimed = true;
+                        const end = l.delay + l.duration;
+                        if (end > maxDuration) maxDuration = end;
+                    }
+                });
+
+                if (!anyTimed) maxDuration = 2000; // Default view loop
+                if (maxDuration === 0) maxDuration = 2000;
+
+                const globalTime = Date.now() % maxDuration;
+                const stripColors = new Array(100).fill('#000000');
+
+                layers.forEach((layer, lIdx) => {
+                    if (!layer.active) return;
+
+                    const startTime = layer.delay;
+                    const endTime = layer.timed ? (layer.delay + layer.duration) : Infinity;
+
+                    // Active Window Check
+                    if (globalTime < startTime) return;
+                    if (layer.timed && globalTime > endTime) return;
+
+                    // Local Behavior
+                    let layerActive = true;
+                    const relativeTime = globalTime - startTime;
+
+                    if (layer.effect === 'Blink') {
+                        if ((relativeTime % 500) > 250) layerActive = false;
+                    }
+                    else if (layer.effect === 'Flicker') {
+                        if ((Date.now() % 100) > 50) layerActive = false;
+                    }
+
+                    if (!layerActive) return;
+
+                    // Density & Area
+                    let start = Math.floor(layer.al);
+                    let end = Math.min(100, start + layer.aw);
+                    let effectiveDensity = layer.density;
+
+                    if (singleLedSections.includes(activeSection)) {
+                        start = 0; end = 100; effectiveDensity = 0;
+                    }
+
+                    if (effectiveDensity === 0) {
+                        for (let i = start; i < end; i++) stripColors[i] = addColors(stripColors[i], layer.hex);
+                    } else {
+                        const rangeSize = end - start;
+                        const targetCount = Math.floor((effectiveDensity / 100) * rangeSize);
+                        let activeCount = 0;
+
+                        for (let i = start; i < end; i++) {
+                            const pState = pixelStates[lIdx][i];
+                            if (pState.isOn) {
+                                if (Date.now() > pState.nextChange) pState.isOn = false;
+                                else activeCount++;
+                            }
+                        }
+
+                        if (activeCount < targetCount) {
+                            let attempts = 0;
+                            while (activeCount < targetCount && attempts < 20) {
+                                const rndIdx = Math.floor(Math.random() * rangeSize) + start;
+                                if (!pixelStates[lIdx][rndIdx].isOn) {
+                                    pixelStates[lIdx][rndIdx].isOn = true;
+                                    pixelStates[lIdx][rndIdx].nextChange = Date.now() + Math.floor(Math.random() * (layer.fmax - layer.fmin + 1)) + layer.fmin;
+                                    activeCount++;
+                                }
+                                attempts++;
+                            }
+                        }
+
+                        for (let i = start; i < end; i++) {
+                            if (pixelStates[lIdx][i].isOn) stripColors[i] = addColors(stripColors[i], layer.hex);
+                        }
+                    }
+                });
+
+                // Draw
+                for (let i = 0; i < 100; i++) {
+                    const led = document.getElementById('led_' + i);
+                    led.style.backgroundColor = stripColors[i];
+                    led.style.boxShadow = stripColors[i] !== '#000000' ? `0 0 5px ${stripColors[i]}` : 'none';
+                }
+
+                previewAnimationFrame = requestAnimationFrame(loop);
+            }
+
+            previewAnimationFrame = requestAnimationFrame(loop);
+        }
+
+        // --- OUTPUT ---
+        function generateString() {
+            let commands = [];
+            const isSingle = singleLedSections.includes(activeSection);
+
+            layers.forEach(l => {
+                if (!l.active) return;
+
+                let parts = [l.color];
+
+                if (l.effect && l.effect !== 'Static') parts.push(l.effect);
+
+                // Output Duration only if timed/needed
+                if (l.effect === 'Blink' || l.effect === 'Pulse' || l.effect === 'Flicker' || (l.timed && (l.effect === '' || l.effect === 'On'))) {
+                    if (l.duration) parts.push(l.duration);
+                }
+
+                if (!isSingle) {
+                    if (l.al !== 0) parts.push(`AL${l.al}`);
+                    if (l.aw !== 100) parts.push(`AW${l.aw}`);
+                }
+
+                if (!isSingle && l.density > 0) {
+                    parts.push(`AFDEN${l.density}`);
+                    if (l.fmin) parts.push(`AFMIN${l.fmin}`);
+                    if (l.fmax) parts.push(`AFMAX${l.fmax}`);
+                }
+
+                commands.push(parts.join(' '));
+            });
+
+            return commands.join(' / ');
+        }
+
+        function applyToSection() {
+            const eCode = document.getElementById('e_code').value.trim();
+            if (!eCode) { alert("Please enter E Code"); return; }
+
+            const str = generateString();
+            if (!str) { alert("No active layers."); return; }
+
+            const segments = str.split(' / ');
+            const finalStr = segments.map(seg => `${eCode} ${seg}`).join('/');
+
+            sectionConfigs[activeSection] = finalStr;
+            saveState();
+            renderStaging();
+        }
+
+        function renderStaging() {
+            const tbody = document.getElementById('stagingBody');
+            tbody.innerHTML = "";
+            sections.forEach(s => {
+                let row = document.createElement('tr');
+                let val = sectionConfigs[s];
+                row.innerHTML = `<td style="font-weight:bold; color:#555;">${s}</td><td style="font-family:monospace; color:${val ? '#2c3e50' : '#ccc'}">${val || '—'}</td>`;
+                tbody.appendChild(row);
+            });
+        }
+
+        function generateCSV() {
+            const eCode = document.getElementById('e_code').value.trim();
+            if (!eCode) { alert("E Code required"); return; }
+
+            let csv = "E Code," + sections.join(",") + "\n";
+            let row = [eCode];
+            sections.forEach(s => {
+                let val = sectionConfigs[s] || "";
+                row.push(`"${val}"`);
+            });
+            csv += row.join(",");
+
+            document.getElementById('finalOutput').value = csv;
+            document.getElementById('finalOutput').select();
+        }
+
+        function clearAllData() {
+            if (confirm("Clear current session code? (This does not reset layers)")) {
+                sectionConfigs = {};
+                sections.forEach(s => sectionConfigs[s] = "");
+                renderStaging();
+                saveState();
+            }
+        }
+    </script>
 </body>
+
 </html>
